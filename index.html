@@ -3,195 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URBAN VIBE | Designed by Kartik M.</title>
+    <title>URBAN VIBE | Kartik M. Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
-        :root {
-            --apple-gray: #f5f5f7;
-            --apple-blue: #0071e3;
-        }
-
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background-color: #fff; 
-            color: #1d1d1f;
-            overflow-x: hidden;
-        }
-
-        /* Apple Blur Effect */
-        .apple-nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(180deg, #fff 0%, #f5f5f7 100%);
-        }
-
-        /* Smooth Section Transitions */
-        .section-animate {
-            animation: appleSlideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes appleSlideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
         .hidden { display: none !important; }
-
-        /* Product Card Styling */
-        .p-card {
-            background: #fff;
-            border-radius: 20px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* Video Background Styling */
+        #video-bg {
+            position: fixed; right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -1; filter: brightness(0.6); object-fit: cover;
         }
 
-        .p-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
         }
 
-        .apple-btn {
-            background: var(--apple-blue);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 980px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
+        .logo-font { font-family: 'Syncopate', sans-serif; letter-spacing: -2px; }
+        
+        /* Animations */
+        .reveal { animation: reveal 1s ease-out; }
+        @keyframes reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .apple-btn:hover {
-            background: #0077ed;
-            opacity: 0.9;
-        }
-
-        /* Hide Scrollbar */
-        ::-webkit-scrollbar { display: none; }
+        .nav-blur { background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
 
-    <nav class="apple-nav fixed top-0 w-full z-[100] h-[44px] flex items-center">
-        <div class="max-w-[1000px] mx-auto w-full flex justify-between px-6 items-center">
-            <span class="text-[17px] font-semibold tracking-tight opacity-80 cursor-pointer" onclick="goDash()">Urban Vibe</span>
-            <div class="flex gap-8 text-[12px] opacity-70 font-medium">
-                <span class="cursor-pointer hover:opacity-100" onclick="goStore()">Store</span>
-                <span class="cursor-pointer hover:opacity-100 hidden md:block">Mac</span>
-                <span class="cursor-pointer hover:opacity-100 hidden md:block">iPad</span>
-                <div class="relative cursor-pointer" onclick="openCart()">
-                    <i class="fa-solid fa-bag-shopping text-[14px]"></i>
-                    <span id="cart-dot" class="absolute -top-1 -right-2 bg-black text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div id="section-login" class="min-h-screen flex items-center justify-center p-6 relative">
+        <video autoplay muted loop id="video-bg">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-background-1610-large.mp4" type="video/mp4">
+        </video>
 
-    <div id="section-login" class="min-h-screen flex items-center justify-center px-6">
-        <div class="max-w-md w-full text-center space-y-12 section-animate">
+        <div class="max-w-md w-full glass-card p-10 text-center space-y-8 reveal">
+            <div class="space-y-2">
+                <h1 class="logo-font text-4xl font-black italic text-white">URBAN VIBE</h1>
+                <p class="text-[10px] font-bold tracking-[0.5em] text-blue-400 uppercase">Explore the Universe of Style</p>
+            </div>
             <div class="space-y-4">
-                <h1 class="text-5xl font-bold tracking-tight">Sign in to Vibe.</h1>
-                <p class="text-xl text-gray-500">Enter your details to start shopping.</p>
+                <input type="text" id="inp-name" placeholder="YOUR NAME" class="w-full p-5 bg-white/10 border border-white/20 rounded-2xl outline-none focus:border-blue-500 text-white font-semibold">
+                <input type="tel" id="inp-phone" placeholder="WHATSAPP NO." class="w-full p-5 bg-white/10 border border-white/20 rounded-2xl outline-none focus:border-blue-500 text-white font-semibold">
+                <button onclick="goDash()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-black uppercase tracking-widest transition-all shadow-lg shadow-blue-500/30">Launch Store</button>
             </div>
-            <div class="space-y-3">
-                <input type="text" id="inp-name" placeholder="First and Last Name" class="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-                <input type="tel" id="inp-phone" placeholder="Phone Number" class="w-full p-4 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-                <button onclick="goDash()" class="w-full apple-btn text-lg mt-4">Continue</button>
-            </div>
-            <p class="text-[12px] text-gray-400 font-medium">© 2026 Developed by <span class="text-black">Kartik M.</span></p>
+            <p class="text-[10px] text-zinc-500 uppercase tracking-widest pt-4">© 2026 Developed by <span class="text-blue-400">Kartik M.</span></p>
         </div>
     </div>
 
-    <div id="section-dash" class="hidden pt-[44px] animate-fade">
-        <section class="h-[90vh] flex flex-col items-center justify-center text-center hero-gradient px-6">
-            <div class="section-animate space-y-4">
-                <h2 class="text-6xl md:text-8xl font-bold tracking-tight">Urban Drop.</h2>
-                <p class="text-2xl md:text-3xl text-zinc-500">Lovable. Drawable. Magical.</p>
-                <div class="pt-8 flex gap-6 justify-center">
-                    <button onclick="goStore()" class="apple-btn px-8 text-lg">Shop Now</button>
-                    <button class="text-blue-600 text-lg hover:underline">Learn more ></button>
+    <div id="section-dash" class="hidden min-h-screen bg-[#050505]">
+        <header class="p-5 flex justify-between items-center nav-blur sticky top-0 z-50 border-b border-white/10">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold">K</div>
+                <span class="logo-font text-lg font-black tracking-tighter">URBAN VIBE</span>
+            </div>
+            <div onclick="openCart()" class="relative cursor-pointer bg-white/10 w-12 h-12 flex items-center justify-center rounded-full border border-white/20">
+                <i class="fa-solid fa-cart-shopping text-blue-400"></i>
+                <span id="cart-dot" class="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+            </div>
+        </header>
+
+        <main class="p-6 space-y-12 max-w-7xl mx-auto">
+            <div class="relative h-[60vh] rounded-[40px] overflow-hidden flex items-center p-10">
+                <img src="https://images.unsplash.com/photo-1614728263952-84ea206f99b6?w=1200" class="absolute inset-0 w-full h-full object-cover opacity-50">
+                <div class="relative z-10 space-y-6 max-w-2xl">
+                    <span class="bg-blue-600 px-4 py-1 rounded-full text-[10px] font-black tracking-widest">GALAXY EDITION</span>
+                    <h2 class="text-6xl font-black italic leading-none tracking-tighter uppercase">Beyond <br> The Clouds.</h2>
+                    <p class="text-zinc-400 text-lg">Curated by Kartik M. for the boldest souls on Earth.</p>
+                    <button onclick="goStore()" class="bg-white text-black px-10 py-4 rounded-full font-black uppercase tracking-widest hover:scale-105 transition-all">Shop Drops</button>
                 </div>
             </div>
-            <img src="https://www.apple.com/v/iphone/home/bu/images/overview/hero/hero_iphone_15_pro__kz6nb7cl996u_large.jpg" class="mt-12 w-full max-w-[800px] object-contain">
-        </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 max-w-[1200px] mx-auto">
-            <div class="h-[500px] bg-zinc-950 rounded-[30px] flex flex-col items-center justify-center text-white text-center p-10 overflow-hidden relative">
-                <h3 class="text-4xl font-bold z-10">Limited Series.</h3>
-                <p class="text-xl opacity-70 z-10 mt-2">New colors available now.</p>
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" class="absolute bottom-[-50px] w-80 rotate-[-20deg] opacity-80">
-            </div>
-            <div class="h-[500px] bg-[#f5f5f7] rounded-[30px] flex flex-col items-center justify-center text-center p-10 relative overflow-hidden">
-                <h3 class="text-4xl font-bold">Concept Store.</h3>
-                <p class="text-xl text-zinc-500 mt-2">Kartik M. Special Edition.</p>
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" class="absolute bottom-[-30px] w-64">
-            </div>
-        </section>
-    </div>
-
-    <div id="section-store" class="hidden pt-[80px] min-h-screen bg-white">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <h2 class="text-5xl font-bold mb-12 tracking-tight">Which is right for you?</h2>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-20"></div>
-        </div>
-    </div>
-
-    <div id="section-checkout" class="hidden pt-[100px] min-h-screen px-6">
-        <div class="max-w-[600px] mx-auto">
-            <h2 class="text-4xl font-bold mb-8">Review your bag.</h2>
-            <div class="bg-[#f5f5f7] p-8 rounded-[30px] space-y-6">
-                <div class="flex justify-between border-b pb-4">
-                    <span class="text-gray-500">Subtotal</span>
-                    <span id="pay-total" class="font-bold">₹0</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div onclick="goStore()" class="glass-card p-8 text-center hover:bg-white/10 transition-all cursor-pointer">
+                    <i class="fa-solid fa-bolt text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="font-bold uppercase text-xs tracking-widest">Trending</h3>
                 </div>
-                <div class="space-y-4">
-                    <p class="font-semibold">Where should we send it?</p>
-                    <textarea id="ship-addr" placeholder="Street Address, City, State" class="w-full p-4 rounded-xl border border-zinc-200 outline-none h-32"></textarea>
-                    <input type="text" id="ship-pin" placeholder="Pincode" class="w-full p-4 rounded-xl border border-zinc-200 outline-none">
+                <div onclick="goStore()" class="glass-card p-8 text-center hover:bg-white/10 transition-all cursor-pointer">
+                    <i class="fa-solid fa-shoe-prints text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="font-bold uppercase text-xs tracking-widest">Sneakers</h3>
                 </div>
-                <button onclick="processFinalOrder()" class="w-full apple-btn py-4 text-lg">Confirm Order</button>
+                <div onclick="goStore()" class="glass-card p-8 text-center hover:bg-white/10 transition-all cursor-pointer">
+                    <i class="fa-solid fa-hat-wizard text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="font-bold uppercase text-xs tracking-widest">Hoodies</h3>
+                </div>
+                <div onclick="goStore()" class="glass-card p-8 text-center hover:bg-white/10 transition-all cursor-pointer">
+                    <i class="fa-solid fa-clock text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="font-bold uppercase text-xs tracking-widest">Limited</h3>
+                </div>
             </div>
+
+            <div class="space-y-6">
+                <h3 class="logo-font text-2xl">LATEST ARRIVALS</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="h-80 rounded-[40px] bg-zinc-900 border border-white/10 overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1552061075-9a8b16666308?w=800" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                            <h4 class="text-3xl font-black italic">CYBER HOODIE</h4>
+                            <button onclick="goStore()" class="text-blue-400 font-bold uppercase text-xs tracking-widest mt-2 text-left">View Details →</button>
+                        </div>
+                    </div>
+                    <div class="h-80 rounded-[40px] bg-zinc-900 border border-white/10 overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=800" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                            <h4 class="text-3xl font-black italic">ORBIT SNKRS</h4>
+                            <button onclick="goStore()" class="text-blue-400 font-bold uppercase text-xs tracking-widest mt-2 text-left">View Details →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-card p-12 text-center bg-gradient-to-r from-blue-900/20 to-purple-900/20">
+                <h2 class="logo-font text-3xl mb-4">MEET THE ARCHITECT</h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                    Urban Vibe isn't just a store; it's a vision crafted by <span class="text-white font-bold">Kartik M.</span> 
+                    Every product is handpicked to ensure you don't just wear clothes, you wear an identity.
+                </p>
+                <div class="flex justify-center gap-6 mt-8">
+                    <i class="fa-brands fa-instagram text-2xl hover:text-blue-500 cursor-pointer"></i>
+                    <i class="fa-brands fa-whatsapp text-2xl hover:text-green-500 cursor-pointer"></i>
+                    <i class="fa-brands fa-github text-2xl hover:text-white cursor-pointer"></i>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="section-store" class="hidden min-h-screen bg-black">
+        <header class="p-6 flex items-center gap-6 nav-blur sticky top-0 z-50 border-b border-white/10">
+            <button onclick="goDash()" class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></button>
+            <h2 class="logo-font text-xl">COLLECTION</h2>
+        </header>
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto"></div>
+    </div>
+
+    <div id="section-checkout" class="hidden min-h-screen p-6 max-w-2xl mx-auto animate-fade">
+        <h2 class="logo-font text-3xl mb-10">CHECKOUT</h2>
+        <div class="glass-card p-8 space-y-6">
+            <input type="text" id="check-name" readonly class="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-zinc-500">
+            <textarea id="ship-addr" placeholder="DELIVERY ADDRESS" class="w-full p-6 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-blue-500 h-32 text-white"></textarea>
+            <input type="text" id="ship-pin" placeholder="PINCODE" class="w-full p-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500 text-white font-bold">
+            <div class="border-t border-white/10 pt-6">
+                <div class="flex justify-between text-2xl font-black italic">
+                    <span>TOTAL</span><span id="pay-total" class="text-blue-500">₹0</span>
+                </div>
+            </div>
+            <button onclick="processFinalOrder()" class="w-full bg-blue-600 py-6 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-blue-500/20">PLACE ORDER</button>
         </div>
     </div>
 
-    <div id="section-success" class="hidden min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <div class="section-animate">
-            <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-8">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            <h2 class="text-5xl font-bold tracking-tight">Your order is set.</h2>
-            <p class="text-xl text-zinc-500 mt-4">Order confirmation sent by Kartik M. system.</p>
-            <button onclick="location.reload()" class="mt-12 text-blue-600 font-medium hover:underline text-lg">Shop more ></button>
+    <div id="section-success" class="hidden fixed inset-0 bg-black z-[1000] flex flex-col items-center justify-center p-10 text-center">
+        <video autoplay muted loop id="video-bg" style="filter: brightness(0.3)">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-background-1610-large.mp4" type="video/mp4">
+        </video>
+        <div class="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center text-white text-4xl shadow-[0_0_50px_rgba(37,99,235,0.6)] mb-8">
+            <i class="fa-solid fa-paper-plane"></i>
         </div>
+        <h2 class="logo-font text-5xl italic">MISSION SUCCESS</h2>
+        <p class="text-zinc-400 mt-4 tracking-widest font-bold">Your order has been launched to Kartik M.'s base.</p>
+        <button onclick="location.reload()" class="mt-12 bg-white text-black px-12 py-5 rounded-full font-black uppercase text-[10px] tracking-widest">Back to Base</button>
     </div>
 
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white z-[200] translate-x-full transition-transform duration-500 shadow-2xl flex flex-col">
-        <div class="p-8 flex justify-between items-center border-b">
-            <h3 class="text-2xl font-bold">Bag</h3>
-            <button onclick="closeCart()" class="text-3xl opacity-50">&times;</button>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-[#0a0a0a] z-[2000] translate-x-full transition-transform duration-500 flex flex-col shadow-2xl border-l border-white/10">
+        <div class="p-8 border-b border-white/10 flex justify-between items-center bg-zinc-900">
+            <span class="logo-font text-xs">YOUR BAG</span>
+            <button onclick="closeCart()" class="text-3xl text-zinc-500 hover:text-white">&times;</button>
         </div>
-        <div id="cart-list" class="flex-1 overflow-y-auto p-8 space-y-8"></div>
-        <div class="p-8 bg-[#f5f5f7] space-y-4">
-            <div class="flex justify-between text-xl font-bold">
-                <span>Total</span>
-                <span id="cart-total">₹0</span>
-            </div>
-            <button onclick="goCheckout()" class="w-full apple-btn py-4">Check Out</button>
+        <div id="cart-list" class="flex-1 overflow-y-auto p-8 space-y-6"></div>
+        <div class="p-8 border-t border-white/10 bg-zinc-900 space-y-6">
+            <div class="flex justify-between text-2xl font-black italic"><span>TOTAL</span><span id="cart-total">₹0</span></div>
+            <button onclick="goCheckout()" class="w-full bg-blue-600 py-6 rounded-2xl font-black tracking-widest uppercase">Secure Checkout</button>
         </div>
     </div>
-
-    <footer class="bg-[#f5f5f7] py-20 px-6 mt-20 text-center text-zinc-500 text-[12px] font-medium">
-        <div class="max-w-[1000px] mx-auto space-y-4">
-            <p>1. Prices include GST and free delivery on all orders.</p>
-            <div class="border-t border-zinc-300 pt-8">
-                Copyright © 2026 Urban Vibe Store. Developed by <span class="text-black font-semibold">Kartik M.</span>
-            </div>
-        </div>
-    </footer>
 
     <script>
         const MY_PHONE = "7046962335";
@@ -199,19 +186,13 @@
         let user = { name: "", phone: "" };
         let products = [];
 
-        // Apple Theme Product Generation
-        const applePics = [
-            '1583743814966-8936f5b7be1a', '1515886657613-9f3515b0c78f', 
-            '1542291026-7eec264c27ff', '1523275335684-37898b6baf30',
-            '1551028150-64b9f998f178', '1618354691373-d851c5c3a990'
-        ];
-
-        for(let i=1; i<=24; i++) {
+        // Space Theme Product Generation
+        for(let i=1; i<=30; i++) {
             products.push({
                 id: i,
-                name: `Urban Edition ${i}`,
-                price: [1999, 2999, 4999, 7999][i % 4],
-                img: `https://images.unsplash.com/photo-${applePics[i % 6]}?w=600&q=80`
+                name: `Astro Gear v${i}`,
+                price: [2499, 1599, 4999, 1299][i % 4],
+                img: `https://images.unsplash.com/photo-${['1552061075-9a8b16666308', '1583743814966-8936f5b7be1a', '1514989940723-e8e51635b782', '1523275335684-37898b6baf30'][i % 4]}?w=600&q=80`
             });
         }
 
@@ -224,7 +205,7 @@
         function goDash() {
             const n = document.getElementById('inp-name').value;
             const p = document.getElementById('inp-phone').value;
-            if(n.length < 3 || p.length < 10) return;
+            if(n.length < 3 || p.length < 10) return alert("Bhai, Space travel ke liye details zaroori hain!");
             user = { name: n, phone: p };
             switchSection('section-dash');
         }
@@ -233,14 +214,13 @@
             switchSection('section-store');
             const grid = document.getElementById('product-grid');
             grid.innerHTML = products.map(p => `
-                <div class="p-card p-8 flex flex-col items-center text-center animate-fade">
-                    <img src="${p.img}" class="w-full h-64 object-contain rounded-2xl mb-8">
-                    <div class="flex flex-col flex-1">
-                        <h4 class="text-2xl font-bold tracking-tight">${p.name}</h4>
-                        <p class="text-lg text-zinc-500 mt-2">New Arrival</p>
-                        <p class="text-xl font-medium mt-4">₹${p.price.toLocaleString()}</p>
+                <div class="glass-card overflow-hidden group">
+                    <img src="${p.img}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="p-4 space-y-2">
+                        <h4 class="text-[10px] font-black text-blue-400 uppercase tracking-widest">${p.name}</h4>
+                        <p class="text-xl font-black italic">₹${p.price}</p>
+                        <button onclick="add(${p.id})" class="w-full bg-white/10 hover:bg-white/20 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest mt-2 border border-white/10 transition-all">+ Add to Bag</button>
                     </div>
-                    <button onclick="add(${p.id})" class="apple-btn mt-8 text-sm">Add to Bag</button>
                 </div>`).join('');
         }
 
@@ -255,29 +235,31 @@
         function updateCart() {
             document.getElementById('cart-dot').innerText = cart.length;
             document.getElementById('cart-list').innerHTML = cart.map(i => `
-                <div class="flex gap-6 items-center">
-                    <img src="${i.img}" class="w-20 h-20 rounded-xl bg-zinc-100 object-cover">
+                <div class="flex gap-4 items-center bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <img src="${i.img}" class="w-16 h-16 rounded-xl object-cover">
                     <div class="flex-1">
-                        <h4 class="font-bold">${i.name}</h4>
-                        <p class="text-zinc-500 text-sm">₹${i.price}</p>
-                        <div class="flex items-center gap-4 mt-2">
-                            <span class="text-sm">Qty: ${i.qty}</span>
+                        <h4 class="text-[10px] font-black uppercase">${i.name}</h4>
+                        <p class="text-blue-400 font-black italic mt-1">₹${i.price}</p>
+                        <div class="flex items-center gap-3 mt-2">
+                            <button onclick="qty(${i.id}, -1)" class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center">-</button>
+                            <span class="text-xs font-bold">${i.qty}</span>
+                            <button onclick="qty(${i.id}, 1)" class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center">+</button>
                         </div>
                     </div>
-                    <button onclick="remove(${i.id})" class="text-blue-600 text-sm">Remove</button>
                 </div>`).join('');
             const sum = cart.reduce((a,b) => a + (b.price*b.qty), 0);
             document.getElementById('cart-total').innerText = "₹" + sum.toLocaleString();
             document.getElementById('pay-total').innerText = "₹" + sum.toLocaleString();
         }
 
-        function remove(id) {
-            cart = cart.filter(x => x.id !== id);
-            updateCart();
+        function qty(id, d) {
+            const i = cart.find(x => x.id === id);
+            if(i) { i.qty += d; if(i.qty < 1) cart = cart.filter(x => x.id !== id); updateCart(); }
         }
 
         function goCheckout() {
             if(cart.length === 0) return;
+            document.getElementById('check-name').value = user.name;
             closeCart();
             switchSection('section-checkout');
         }
@@ -285,15 +267,15 @@
         function processFinalOrder() {
             const addr = document.getElementById('ship-addr').value;
             const pin = document.getElementById('ship-pin').value;
-            if(!addr || pin.length < 6) return alert("Please fill shipping details.");
+            if(!addr || pin.length < 6) return alert("Base station address missing!");
 
-            let msg = `*NEW ORDER - KARTIK M. STORE*%0A`;
-            msg += `*Name:* ${user.name}%0A`;
-            msg += `*Address:* ${addr}, ${pin}%0A%0A`;
-            msg += `*Bag:*%0A`;
+            let msg = `*MISSION ORDER - URBAN VIBE*%0A`;
+            msg += `*Commander:* ${user.name}%0A`;
+            msg += `*Coordinates:* ${addr}, ${pin}%0A%0A`;
+            msg += `*Cargo:*%0A`;
             cart.forEach(item => { msg += `- ${item.name} (x${item.qty})%0A`; });
             const total = cart.reduce((a,b) => a + (b.price*b.qty), 0);
-            msg += `%0A*TOTAL:* ₹${total.toLocaleString()}`;
+            msg += `%0A*TOTAL CARGO VALUE:* ₹${total.toLocaleString()}`;
 
             window.open(`https://wa.me/91${MY_PHONE}?text=${msg}`, '_blank');
             switchSection('section-success');
