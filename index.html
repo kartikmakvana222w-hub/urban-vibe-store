@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBAN VIBE | Official Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; overflow-x: hidden; }
+        .logo-font { font-family: 'Syncopate', sans-serif; }
+        .hidden { display: none !important; }
+        .sidebar { transition: 0.4s ease; transform: translateX(-100%); z-index: 9999; }
+        .sidebar.active { transform: translateX(0); }
+        .page-transition { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div id="section-login" class="min-h-screen flex items-center justify-center p-6 bg-white">
+        <div class="max-w-md w-full text-center">
+            <h1 class="logo-font text-3xl mb-12 italic tracking-tighter">URBAN VIBE</h1>
+            <div class="space-y-4">
+                <input type="text" id="inp-name" placeholder="Full Name" class="w-full p-5 bg-gray-50 border-2 rounded-3xl outline-none focus:border-black transition-all">
+                <input type="tel" id="inp-phone" placeholder="Mobile Number" class="w-full p-5 bg-gray-50 border-2 rounded-3xl outline-none focus:border-black transition-all">
+                <button onclick="goDash()" class="w-full bg-black text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-2xl active:scale-95 transition">Enter Store</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-72 bg-black text-white p-8">
+        <button onclick="closeMenu()" class="absolute top-6 right-6 text-2xl">&times;</button>
+        <div class="mt-12 p-6 bg-zinc-900 rounded-[30px] border border-zinc-800">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase mb-1">Active User</p>
+            <h2 id="user-display" class="font-black text-lg uppercase italic text-white">Guest</h2>
+            <p id="phone-display" class="text-xs text-zinc-400">+91 0000000000</p>
+        </div>
+        <nav class="mt-10 space-y-6 font-black uppercase text-[10px] tracking-[0.2em]">
+            <div onclick="goDash()" class="cursor-pointer hover:text-red-500"><i class="fa-solid fa-house mr-3"></i> Home</div>
+            <div onclick="goStore()" class="cursor-pointer hover:text-red-500"><i class="fa-solid fa-shop mr-3"></i> All Products</div>
+            <div onclick="location.reload()" class="pt-20 opacity-30">Logout Account</div>
+        </nav>
+    </div>
+
+    <div id="section-dash" class="hidden page-transition">
+        <header class="p-5 flex justify-between items-center bg-white sticky top-0 z-50 border-b">
+            <i class="fa-solid fa-bars-staggered text-xl cursor-pointer" onclick="openMenu()"></i>
+            <span class="logo-font text-sm">URBAN VIBE</span>
+            <div onclick="openCart()" class="relative cursor-pointer">
+                <i class="fa-solid fa-bag-shopping text-xl"></i>
+                <span id="cart-dot" class="absolute -top-2 -right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+            </div>
+        </header>
+
+        <main class="p-4 space-y-8 max-w-6xl mx-auto">
+            <div class="h-80 md:h-[450px] rounded-[50px] bg-black text-white p-10 flex flex-col justify-end shadow-2xl relative overflow-hidden" 
+                 style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1200'); background-size: cover; background-position: center;">
+                <h2 class="text-5xl md:text-7xl font-black italic uppercase leading-none mb-6">New<br>Street Era</h2>
+                <button onclick="goStore()" class="w-max bg-white text-black px-12 py-5 rounded-full text-[11px] font-black uppercase tracking-widest shadow-xl active:scale-90 transition">Shop Now</button>
+            </div>
+            
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-8 bg-zinc-100 rounded-[40px] text-center border cursor-pointer hover:bg-black hover:text-white transition group" onclick="goStore()">
+                    <i class="fa-solid fa-bolt text-2xl mb-2 group-hover:animate-pulse"></i>
+                    <p class="font-black text-[10px] uppercase tracking-widest">Trending</p>
+                </div>
+                <div class="p-8 bg-zinc-100 rounded-[40px] text-center border cursor-pointer hover:bg-black hover:text-white transition group" onclick="goStore()">
+                    <i class="fa-solid fa-fire text-2xl mb-2"></i>
+                    <p class="font-black text-[10px] uppercase tracking-widest">Hottest</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="section-store" class="hidden min-h-screen page-transition">
+        <header class="p-6 flex items-center gap-6 border-b bg-white sticky top-0 z-50">
+            <i class="fa-solid fa-arrow-left text-xl cursor-pointer" onclick="goDash()"></i>
+            <h2 class="font-black italic uppercase text-sm">Exclusive Catalogue</h2>
+        </header>
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 max-w-7xl mx-auto"></div>
+    </div>
+
+    <div id="section-checkout" class="hidden min-h-screen p-6 max-w-2xl mx-auto page-transition">
+        <div class="flex items-center gap-4 mb-8">
+            <button onclick="goStore()" class="w-10 h-10 bg-white border rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-chevron-left"></i></button>
+            <h2 class="text-2xl font-black italic uppercase">Order Details</h2>
+        </div>
+
+        <div class="bg-white p-8 rounded-[40px] shadow-sm border space-y-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[10px] font-black uppercase text-zinc-400 ml-2">Customer Name</label>
+                    <input type="text" id="check-name" readonly class="w-full mt-2 p-5 bg-gray-100 border rounded-3xl outline-none text-zinc-500 font-bold">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-zinc-400 ml-2">Phone Number</label>
+                    <input type="text" id="check-phone" readonly class="w-full mt-2 p-5 bg-gray-100 border rounded-3xl outline-none text-zinc-500 font-bold">
+                </div>
+            </div>
+            <div>
+                <label class="text-[10px] font-black uppercase text-zinc-400 ml-2">Shipping Address</label>
+                <textarea id="ship-addr" placeholder="Flat No, Street, Landmark, City..." class="w-full mt-2 p-5 bg-gray-50 border-2 rounded-3xl outline-none focus:border-black h-24 transition-all"></textarea>
+            </div>
+            <div>
+                <label class="text-[10px] font-black uppercase text-zinc-400 ml-2">Pincode</label>
+                <input type="text" id="ship-pin" placeholder="XXXXXX" class="w-full mt-2 p-5 bg-gray-50 border-2 rounded-3xl outline-none focus:border-black transition-all">
+            </div>
+            <div>
+                <label class="text-[10px] font-black uppercase text-zinc-400 ml-2">Payment Method</label>
+                <div class="mt-2 p-5 border-2 border-black rounded-3xl flex items-center justify-between bg-zinc-50">
+                    <span class="font-black text-xs uppercase italic"><i class="fa-solid fa-truck-fast mr-2"></i> Cash on Delivery</span>
+                    <i class="fa-solid fa-circle-check text-black text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-black text-white p-8 rounded-[45px] shadow-2xl">
+            <div class="flex justify-between font-black text-2xl italic mb-8"><span>Total Bill</span><span id="pay-total">₹0</span></div>
+            <button onclick="processFinalOrder()" class="w-full bg-white text-black py-6 rounded-3xl font-black uppercase tracking-[0.2em] shadow-xl active:scale-95 transition">Confirm Order</button>
+            <p class="text-center text-[8px] opacity-40 mt-4 uppercase font-bold tracking-widest italic">Order will be processed securely</p>
+        </div>
+    </div>
+
+    <div id="section-success" class="hidden fixed inset-0 bg-white z-[10000] flex flex-col items-center justify-center p-10 text-center">
+        <div class="w-28 h-28 bg-green-500 rounded-full flex items-center justify-center text-white text-5xl shadow-[0_20px_50px_rgba(34,197,94,0.4)] animate-bounce">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 class="text-4xl font-black italic uppercase mt-10 tracking-tighter">Order Placed Successfully!</h2>
+        <p class="text-gray-400 mt-3 font-bold uppercase text-[10px] tracking-[0.3em]">Our team will contact you shortly</p>
+        <button onclick="location.reload()" class="mt-12 bg-black text-white px-12 py-5 rounded-full font-black uppercase text-[10px] tracking-widest shadow-xl">Back to Store</button>
+    </div>
+
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white z-[9000] translate-x-full transition-transform duration-500 flex flex-col shadow-2xl">
+        <div class="p-8 border-b flex justify-between items-center bg-black text-white">
+            <span class="font-black italic uppercase tracking-widest">Shopping Bag</span>
+            <button onclick="closeCart()" class="text-2xl">&times;</button>
+        </div>
+        <div id="cart-list" class="flex-1 overflow-y-auto p-6 space-y-4 bg-zinc-50"></div>
+        <div class="p-8 border-t bg-white">
+            <div class="flex justify-between font-black text-2xl mb-8 italic"><span>Subtotal:</span><span id="cart-total">₹0</span></div>
+            <button onclick="goCheckout()" class="w-full bg-black text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl active:scale-95 transition">Check Out Now</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let user = { name: "", phone: "" };
+        let products = [];
+
+        // Generate 40 products
+        for(let i=1; i<=40; i++) {
+            products.push({
+                id: i,
+                name: `Urban Limited Ed. V${i}`,
+                price: [1199, 1499, 2199, 3999][i % 4],
+                img: `https://images.unsplash.com/photo-${['1583743814966-8936f5b7be1a', '1515886657613-9f3515b0c78f', '1542291026-7eec264c27ff', '1523275335684-37898b6baf30'][i%4]}?w=400&sig=${i}`
+            });
+        }
+
+        function switchSection(id) {
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function goDash() {
+            const n = document.getElementById('inp-name').value;
+            const p = document.getElementById('inp-phone').value;
+            if(!n || !p) return alert("Bhai name aur phone dalo!");
+            user = { name: n, phone: p };
+            document.getElementById('user-display').innerText = user.name;
+            document.getElementById('phone-display').innerText = "+91 " + user.phone;
+            switchSection('section-dash');
+        }
+
+        function goStore() {
+            switchSection('section-store');
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="bg-white rounded-[40px] p-4 flex flex-col shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <img src="${p.img}" class="w-full h-40 md:h-56 object-cover rounded-[30px] mb-4">
+                    <h4 class="font-bold text-[9px] uppercase text-zinc-400 truncate px-2">${p.name}</h4>
+                    <p class="font-black text-xl italic px-2 mb-4">₹${p.price}</p>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="buyNow(${p.id})" class="bg-black text-white py-3 rounded-2xl text-[9px] font-black uppercase">Buy Now</button>
+                        <button onclick="add(${p.id})" class="border-2 border-zinc-100 text-black py-3 rounded-2xl text-[9px] font-black uppercase hover:bg-gray-50">Add to Bag</button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function add(id) {
+            const p = products.find(x => x.id === id);
+            const ex = cart.find(x => x.id === id);
+            if(ex) ex.qty++; else cart.push({...p, qty: 1});
+            updateCart();
+            openCart();
+        }
+
+        function buyNow(id) {
+            const p = products.find(x => x.id === id);
+            cart = [{...p, qty: 1}];
+            updateCart();
+            goCheckout();
+        }
+
+        function qty(id, d) {
+            const i = cart.find(x => x.id === id);
+            if(i) { i.qty += d; if(i.qty < 1) cart = cart.filter(x => x.id !== id); updateCart(); }
+        }
+
+        function updateCart() {
+            document.getElementById('cart-dot').innerText = cart.length;
+            const list = document.getElementById('cart-list');
+            list.innerHTML = cart.map(i => `
+                <div class="flex gap-4 items-center bg-white p-5 rounded-[30px] border shadow-sm">
+                    <img src="${i.img}" class="w-16 h-16 rounded-2xl object-cover">
+                    <div class="flex-1 font-black text-[10px] uppercase">
+                        ${i.name}<br><span class="text-red-600">₹${i.price}</span>
+                        <div class="flex items-center gap-3 mt-2">
+                            <button onclick="qty(${i.id}, -1)" class="w-6 h-6 bg-zinc-100 rounded-full">-</button>
+                            <span class="text-xs">${i.qty}</span>
+                            <button onclick="qty(${i.id}, 1)" class="w-6 h-6 bg-zinc-100 rounded-full">+</button>
+                        </div>
+                    </div>
+                </div>`).join('') || "<div class='py-20 text-center opacity-20 font-black italic'>BAG IS EMPTY</div>";
+            const sum = cart.reduce((a,b) => a + (b.price*b.qty), 0);
+            document.getElementById('cart-total').innerText = "₹" + sum;
+            document.getElementById('pay-total').innerText = "₹" + sum;
+        }
+
+        function goCheckout() {
+            if(cart.length === 0) return;
+            // Auto-fill user details from login
+            document.getElementById('check-name').value = user.name;
+            document.getElementById('check-phone').value = user.phone;
+            closeCart();
+            switchSection('section-checkout');
+        }
+
+        function processFinalOrder() {
+            const addr = document.getElementById('ship-addr').value;
+            const pin = document.getElementById('ship-pin').value;
+            if(!addr || !pin) return alert("Pura address aur pincode fill karo!");
+
+            // Silent Data Log (No WhatsApp opening)
+            console.log("Order Data:", { user, cart, address: addr, pincode: pin });
+            
+            // Just show success
+            switchSection('section-success');
+        }
+
+        function openMenu() { document.getElementById('sidebar').classList.add('active'); }
+        function closeMenu() { document.getElementById('sidebar').classList.remove('active'); }
+        function openCart() { document.getElementById('cart-sidebar').classList.remove('translate-x-full'); }
+        function closeCart() { document.getElementById('cart-sidebar').classList.add('translate-x-full'); }
+    </script>
+</body>
+</html>
